@@ -20,7 +20,7 @@ import com.eliasreis.TudoBomLanches.ingredientes.Queijo;
 @RequestMapping("tudoBomLanches/api/ListaLanches")
 public class LanchesController {
 	public ArrayList<ProdutosDTO> lanches = new ArrayList<ProdutosDTO>();
-	@PostMapping
+	@GetMapping
 	public ResponseEntity<ResponseProdutos> ListaProdutos() {
 		ResponseProdutos<ProdutosDTO> response = new ResponseProdutos<ProdutosDTO>();
 		ProdutosDTO lanche1 = new ProdutosDTO();
