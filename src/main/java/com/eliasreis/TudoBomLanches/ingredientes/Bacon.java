@@ -9,6 +9,9 @@ public class Bacon {
 	public Bacon(int Quantidade) {
 		this.setQuantidade(Quantidade);
 	}
+	public static String getNome() {
+		return nome;
+	}
 	public int getQuantidade() {
 		return quantidade;
 	}

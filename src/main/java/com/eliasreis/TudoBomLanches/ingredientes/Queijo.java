@@ -9,6 +9,9 @@ public class Queijo {
 	public Queijo(int Quantidade) {
 		this.setQuantidade(Quantidade);
 	}
+	public static String getNome() {
+		return nome;
+	}
 	public int getQuantidade() {
 		return quantidade;
 	}

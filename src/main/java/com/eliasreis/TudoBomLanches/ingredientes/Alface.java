@@ -10,6 +10,9 @@ public class Alface {
 		this.setQuantidade(Quantidade);
 	}
 	
+	public static String getNome() {
+		return nome;
+	}
 	public int getQuantidade() {
 		return quantidade;
 	}

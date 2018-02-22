@@ -6,6 +6,7 @@ import com.eliasreis.TudoBomLanches.ingredientes.Ovo;
 import com.eliasreis.TudoBomLanches.ingredientes.Queijo;
 
 public class XEggBacon {
+	public String nome = "XEggBacon";
 	Ovo ovo = new Ovo(1);
 	Hamburguer hamburguer = new Hamburguer(1);
 	Queijo queijo = new Queijo(1);
@@ -13,5 +14,8 @@ public class XEggBacon {
 	
 	public double getValorDoLanche() {
 		return (ovo.getValorTotal()+hamburguer.getValorTotal()+queijo.getValorTotal()+bacon.getValorTotal());
+	}
+	public String getNome() {
+		return nome;
 	}
 }

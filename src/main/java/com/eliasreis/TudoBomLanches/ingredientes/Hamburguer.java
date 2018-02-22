@@ -12,6 +12,9 @@ public class Hamburguer {
 	public int getQuantidade() {
 		return quantidade;
 	}
+	public static String getNome() {
+		return nome;
+	}
 	public void setQuantidade(int quantidade) {
 		this.quantidade = quantidade;
 		this.valorTotal = (valor*quantidade);
