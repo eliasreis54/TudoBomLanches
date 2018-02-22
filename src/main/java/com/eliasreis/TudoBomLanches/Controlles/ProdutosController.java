@@ -15,10 +15,10 @@ import com.eliasreis.TudoBomLanches.ingredientes.Queijo;
 @RestController
 @RequestMapping("tudoBomLanches/api/ListaProdutos")
 public class ProdutosController {
-	public ArrayList<ProdutosDTO> produtos = new ArrayList<ProdutosDTO>();
 	@GetMapping
 	public ResponseEntity<ResponseProdutos> ListaProdutos() {
 		ResponseProdutos<ProdutosDTO> response = new ResponseProdutos<ProdutosDTO>();
+		ArrayList<ProdutosDTO> produtos = new ArrayList<ProdutosDTO>();
 		ProdutosDTO prod1 = new ProdutosDTO();
 		ProdutosDTO prod2 = new ProdutosDTO();
 		ProdutosDTO prod3 = new ProdutosDTO();
