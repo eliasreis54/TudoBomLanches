@@ -32,6 +32,11 @@
             <article ng-view="">
             </article>
         </section>
+        <div class="container" ng-show="valorDesconto">
+            <div class="alert alert-primary" role="alert">
+                <p class="text-center">O seu pedido tem um desconto de {{valorDesconto | currency}} por estar dentro da promoção ligth.</p>
+            </div>
+        </div>
         <div class="container" ng-show="valorPedido">
             <div class="alert alert-primary" role="alert">
                 <p class="text-center">O valor total do seu pedido é: {{valorPedido | currency}}</p>

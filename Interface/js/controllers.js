@@ -4,6 +4,9 @@ app.run(function($rootScope) {
     $rootScope.valorPedido = 0;
     $rootScope.valorLanches = 0;
     $rootScope.valorProdutos = 0;
+    $rootScope.valorDesconto = 0;
+    $rootScope.percDescontoLigth = 10;
+    $rootScope.erro = "";
 });
 app.config(function($routeProvider, $locationProvider)
 {
@@ -68,7 +71,13 @@ app.controller('ProdutosController', function($rootScope, $location, $http, $sco
                 }
             }
         });
-        $rootScope.valorPedido = ($rootScope.valorLanches+$rootScope.valorProdutos);
+        if ($rootScope.temAlface == 1 && $rootScope.temBacon == 0){
+            $rootScope.valorDesconto = (($rootScope.valorLanches+$rootScope.valorProdutos)*($rootScope.percDescontoLigth/100));
+        }
+        else{
+            $rootScope.valorDesconto = 0;
+        }
+        $rootScope.valorPedido = (($rootScope.valorLanches+$rootScope.valorProdutos)-$rootScope.valorDesconto);
     }
 
     $scope.calculaValorPromocoes = function($rootScope){
@@ -85,6 +94,23 @@ app.controller('ProdutosController', function($rootScope, $location, $http, $sco
                     }
                 }else{
                     element.valorPromocional = 0;
+                }
+            }
+            
+            if (element.nome == "Alface"){
+                if (element.quantidade > 0){
+                    $rootScope.temAlface = 1;
+                }
+                else{
+                    $rootScope.temAlface = 0;
+                }
+            }
+            if (element.nome == "Bacon"){
+                if (element.quantidade > 0){
+                    $rootScope.temBacon = 1;
+                }
+                else{
+                    $rootScope.temBacon = 0;
                 }
             }
         });
