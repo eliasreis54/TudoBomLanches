@@ -23,14 +23,14 @@ app.config(function($routeProvider, $locationProvider)
 
    // para a rota '/sobre', carregaremos o template sobre.html e o controller 'SobreCtrl'
    .when('/monteoseu', {
-      templateUrl : 'tudobomlanches/pages/monteoseu.html',
+      templateUrl : 'TudoBomLanches/Interface/pages/monteoseu.html',
       controller  : 'ProdutosController',
       controllerAs: "vm"
    })
 
    // para a rota '/contato', carregaremos o template contato.html e o controller 'ContatoCtrl'
    .when('/lanches', {
-      templateUrl : 'tudobomlanches/pages/lanches.html',
+      templateUrl : 'TudoBomLanches/Interface/pages/lanches.html',
       controller  : 'LanchesController',
       controllerAs: "vm"
    })
