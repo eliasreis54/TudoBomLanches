@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <h5>
+                    <p class="text-center">Produto</p>
+                </h5>
+            </div>
+            <div class="col-sm">
+                <h5>
+                    <p class="text-center">Valor Unitário</p>
+                </h5>
+            </div>
+            <div class="col-sm">
+                <h5>
+                    <p class="text-center">Quantidade</p>
+                </h5>
+            </div>
+            <div class="col-sm">
+                <h5>
+                    <p class="text-center">Valor total</p>
+                </h5>
+            </div>
+            <div class="col-sm">
+                <h5>
+                    <p class="text-center">Valor promocional</p>
+                </h5>
+            </div>
+        </div>
+    </div>
+    <div class="container" ng-controller="ProdutosController as vm">
+        <div class="row" ng-repeat="produto in produtos.java">
+            <div class="col-sm">
+                <p class="text-center">{{produto.nome}}</p>
+            </div>
+            <div class="col-sm">
+                <p class="text-center">{{produto.valor | currency}}</p>
+            </div>
+            <div class="col-sm">
+                <div class="form-group">
+                    <div class="row" align="center">
+                        <input type="number" min="0" class="form-control" id="qtdProduto" aria-describedby="qtdProduto" placeholder="Quantidade"  ng-model="produto.quantidade" ng-change="calculaValorTotalProduto($index, produto.quantidade, produto.valor)">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <p class="text-center">{{produto.total | currency}}</p>
+            </div>
+            <div class="col-sm">
+                <p class="text-center">{{produto.valorPromocional | currency}}
+                <small id="promoção" ng-show="produto.valorPromocional" class="form-text text-muted">promoção</small></p>
+            </div>
+        </div>
+    </div>
+</div>

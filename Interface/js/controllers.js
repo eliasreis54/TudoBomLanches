@@ -1,36 +1,81 @@
-var app = angular.module('app', []);
+var app = angular.module('app',['ngRoute']);
 
-app.controller('ProdutosController', function($http, $scope) {
+app.run(function($rootScope) {
+    $rootScope.valorPedido = 0;
+    $rootScope.valorLanches = 0;
+    $rootScope.valorProdutos = 0;
+});
+app.config(function($routeProvider, $locationProvider)
+{
+   // remove o # da url
+   $locationProvider.html5Mode(true);
+
+   $routeProvider
+
+   // para a rota '/', carregaremos o template home.html e o controller 'HomeCtrl'
+   .when('/index', {
+      templateUrl : 'index.html',
+      controller  : 'home',
+   })
+
+   // para a rota '/sobre', carregaremos o template sobre.html e o controller 'SobreCtrl'
+   .when('/monteoseu', {
+      templateUrl : 'tudobomlanches/pages/monteoseu.html',
+      controller  : 'ProdutosController',
+      controllerAs: "vm"
+   })
+
+   // para a rota '/contato', carregaremos o template contato.html e o controller 'ContatoCtrl'
+   .when('/lanches', {
+      templateUrl : 'tudobomlanches/pages/lanches.html',
+      controller  : 'LanchesController',
+      controllerAs: "vm"
+   })
+
+   // caso não seja nenhum desses, redirecione para a rota '/'
+   .otherwise ({ redirectTo: '/' });
+});
+
+app.controller('ProdutosController', function($rootScope, $location, $http, $scope) {
+    $rootScope.activetab = $location.path();
     var vm = this;
-    $scope.valorPedido = 0;
+    
     $scope.descontoPromocao = 0;
     $scope.nomePromocoes = 0;
-    $http({
-        method : "GET",
-        url : "https://polar-meadow-46819.herokuapp.com/tudoBomLanches/api/ListaProdutos"
-    }).then(function(response) {
-        vm.produtos = response.data;
-    });
-
+    if ($rootScope.produtos==0 || $rootScope.produtos == undefined){
+        $http({
+            method : "GET",
+            url : "https://polar-meadow-46819.herokuapp.com/tudoBomLanches/api/ListaProdutos"
+        }).then(function(response) {
+            $rootScope.produtos = response.data;
+        });
+    }
     $scope.calculaValorTotalProduto =function(i, quantiade, valor){
-        vm.produtos.java[i].total = (quantiade*valor);
-        $scope.calculaValorTotal(vm);
+        $rootScope.produtos.java[i].total = (quantiade*valor);
+        $scope.calculaValorPromocoes($rootScope);
+        
     };
 
-    $scope.calculaValorTotal = function(vm){
-        $scope.valorPedido = 0;
-        vm.produtos.java.forEach(element => {
+    $scope.calculaValorTotal = function(){
+        $rootScope.valorProdutos = 0;
+        $rootScope.produtos.java.forEach(element => {
             if (element.total != undefined){
-                $scope.valorPedido = (element.total+$scope.valorPedido);
+                if (element.valorPromocional != undefined && element.valorPromocional != 0){
+                    $rootScope.valorProdutos = (element.valorPromocional+$rootScope.valorProdutos);
+                }
+                else{
+                    $rootScope.valorProdutos = (element.total+$rootScope.valorProdutos);
+                }
             }
         });
-        $scope.calculaValorPromocoes(vm);
+        $rootScope.valorPedido = ($rootScope.valorLanches+$rootScope.valorProdutos);
     }
 
-    $scope.calculaValorPromocoes = function(vm){
+    $scope.calculaValorPromocoes = function($rootScope){
+        $rootScope.activetab = $location.path();
         $scope.descontoPromocao = 0;
         $scope.nomePromocoes = "";
-        vm.produtos.java.forEach(element => {
+        $rootScope.produtos.java.forEach(element => {
             if (element.nome == "Hamburguer" || element.nome == "Queijo"){
                 if (element.quantidade >=3){
                     if (element.quantidade % 3 == 0){
@@ -43,19 +88,40 @@ app.controller('ProdutosController', function($http, $scope) {
                 }
             }
         });
+        $scope.calculaValorTotal();
     }
 });
 
-app.controller('LanchesController', function($http, $scope) {
+app.controller('LanchesController', function($http, $scope, $rootScope, $location) {
+    $rootScope.activetab = $location.path();
     var vm = this;
-    $scope.valorPedido = 0;
     $scope.descontoPromocao = 0;
     $scope.nomePromocoes = 0;
-    $http({
-        method : "GET",
-        url : "https://polar-meadow-46819.herokuapp.com/tudoBomLanches/api/ListaLanches"
-    }).then(function(response) {
-        vm.lanches = response.data;
-    });
+    if ($rootScope.lanches == 0 || $rootScope.lanches == undefined){
+        $http({
+            method : "GET",
+            url : "https://polar-meadow-46819.herokuapp.com/tudoBomLanches/api/ListaLanches"
+        }).then(function(response) {
+            $rootScope.lanches = response.data;
+        });
+    }
 
+    $scope.calculaValorTotallanche =function(i, quantiade, valor){
+        $rootScope.lanches.java[i].total = (quantiade*valor);
+        $scope.calculaValorTotal();
+    };
+
+    $scope.calculaValorTotal = function(){
+        $rootScope.valorLanches = 0;
+        $rootScope.lanches.java.forEach(element => {
+            if (element.total != undefined){
+                $rootScope.valorLanches = (element.total+$rootScope.valorLanches);
+            }
+        });
+        $rootScope.valorPedido = ($rootScope.valorLanches+$rootScope.valorProdutos);
+    }
+});
+
+app.controller('home', function($http, $scope, $rootScope, $location) {
+    $rootScope.activetab = $location.path();
 });
