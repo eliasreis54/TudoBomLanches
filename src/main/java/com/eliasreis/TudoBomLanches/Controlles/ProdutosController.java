@@ -32,15 +32,15 @@ public class ProdutosController {
 		Queijo queijo = new Queijo(1);
 		
 		prod1.setNome(alface.getNome());
-		prod1.setValor(alface.getValor());
+		prod1.setValor(alface.getValorTotal());
 		prod2.setNome(bacon.getNome());
-		prod2.setValor(bacon.getValor());
+		prod2.setValor(bacon.getValorTotal());
 		prod3.setNome(hb.getNome());
-		prod3.setValor(hb.getValor());
+		prod3.setValor(hb.getValorTotal());
 		prod4.setNome(ovo.getNome());
-		prod4.setValor(ovo.getValor());
+		prod4.setValor(ovo.getValorTotal());
 		prod5.setNome(queijo.getNome());
-		prod5.setValor(queijo.getValor());
+		prod5.setValor(queijo.getValorTotal());
 		produtos.add(prod1);
 		produtos.add(prod2);
 		produtos.add(prod3);

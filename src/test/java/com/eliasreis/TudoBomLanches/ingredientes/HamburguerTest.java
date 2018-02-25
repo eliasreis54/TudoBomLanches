@@ -1,31 +1,28 @@
 package com.eliasreis.TudoBomLanches.ingredientes;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
 public class HamburguerTest {
-	private static final String nome = "Hamburguer";
-	private int quantidade;
-	private double valor = 3.00;
-	private double valorTotal;
+	@Test
+	public void testVerificaPrecosOriginal() throws Exception {
+		Hamburguer hamburguer = new Hamburguer(1);
+		assertEquals(3.00, hamburguer.getValorTotal(), 0.0);
+	}
 	
-	public HamburguerTest(int Quantidade) {
-		this.setQuantidade(Quantidade);
+	@Test
+	public void testVerificaPrecosAlterado() throws Exception {
+		Hamburguer hamburguer = new Hamburguer(1);
+		
+		hamburguer.setValor(6.00);
+		hamburguer.setQuantidade(1);
+		assertEquals(6.00, hamburguer.getValorTotal(), 0.0);
 	}
-	public int getQuantidade() {
-		return quantidade;
-	}
-	public static String getNome() {
-		return nome;
-	}
-	public void setQuantidade(int quantidade) {
-		this.quantidade = quantidade;
-		this.valorTotal = (valor*quantidade);
-	}
-	public double getValor() {
-		return valor;
-	}
-	public void setValor(double valor) {
-		this.valor = valor;
-	}
-	public double getValorTotal() {
-		return valorTotal;
+	
+	@Test
+	public void testVerificaPrecosQuantidade() throws Exception {
+		Hamburguer hamburguer = new Hamburguer(2);
+		assertEquals(6.00, hamburguer.getValorTotal(), 0.0);
 	}
 }
