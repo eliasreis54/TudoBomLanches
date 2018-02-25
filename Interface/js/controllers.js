@@ -7,7 +7,7 @@ app.run(function($rootScope) {
     $rootScope.valorDesconto = 0;
     $rootScope.percDescontoLigth = 10;
     $rootScope.erro = "";
-});
+}); 
 app.config(function($routeProvider, $locationProvider)
 {
    // remove o # da url
