@@ -5,7 +5,7 @@ Breve descrição do projeto: Uma startup do ramo de alimentos, precisa de uma s
 
 
 ## Utilizando
-### Requirements
+### Requisitos
 Utilizar navegador google chrome, excutar da seguinte maneira:
 aperte a tecla com o simbolo do windows + a tecla R e execute o seguinte comando "chrome.exe --user-data-dir="C:/Chrome dev session" --disable-web-security".
 
