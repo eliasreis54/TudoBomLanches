@@ -9,7 +9,7 @@ Breve descrição do projeto: Uma startup do ramo de alimentos, precisa de uma s
 Utilizar navegador google chrome, excutar da seguinte maneira:
 aperte a tecla com o simbolo do windows + a tecla R e execute o seguinte comando "chrome.exe --user-data-dir="C:/Chrome dev session" --disable-web-security".
 
-
+* link de utilização http://35.225.82.210/TudoBomLanches/Interface/
 
 ## Tecnologias utilizadas
 * API desenvolvida em JAVA utilizando Maven para gerenciar as dependências.
