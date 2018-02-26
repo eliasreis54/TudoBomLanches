@@ -15,20 +15,20 @@ app.config(function($routeProvider, $locationProvider)
 
    $routeProvider
 
-   // para a rota '/', carregaremos o template home.html e o controller 'HomeCtrl'
+   // para a rota '/', carregaremos o template index.html e o controller 'home'
    .when('/index', {
       templateUrl : 'index.html',
       controller  : 'home',
    })
 
-   // para a rota '/sobre', carregaremos o template sobre.html e o controller 'SobreCtrl'
+   // para a rota '/monteoseu', carregaremos o template monteoseu.html e o controller 'ProdutosController'
    .when('/monteoseu', {
       templateUrl : 'TudoBomLanches/Interface/pages/monteoseu.html',
       controller  : 'ProdutosController',
       controllerAs: "vm"
    })
 
-   // para a rota '/contato', carregaremos o template contato.html e o controller 'ContatoCtrl'
+   // para a rota '/lanches', carregaremos o template lanches.html e o controller 'LanchesController'
    .when('/lanches', {
       templateUrl : 'TudoBomLanches/Interface/pages/lanches.html',
       controller  : 'LanchesController',
@@ -45,6 +45,7 @@ app.controller('ProdutosController', function($rootScope, $location, $http, $sco
     
     $scope.descontoPromocao = 0;
     $scope.nomePromocoes = 0;
+    //conexão com a API para pegar os dados dos produtos
     if ($rootScope.produtos==0 || $rootScope.produtos == undefined){
         $http({
             method : "GET",
@@ -53,12 +54,15 @@ app.controller('ProdutosController', function($rootScope, $location, $http, $sco
             $rootScope.produtos = response.data;
         });
     }
+
+    //Função que calcula o valor do produto de acordo com a quantidade
     $scope.calculaValorTotalProduto =function(i, quantiade, valor){
         $rootScope.produtos.java[i].total = (quantiade*valor);
         $scope.calculaValorPromocoes($rootScope);
         
     };
 
+    //Função que calcula o valor do peido de acordo com a quantidade de lanches e produtos escolhidos
     $scope.calculaValorTotal = function(){
         $rootScope.valorProdutos = 0;
         $rootScope.produtos.java.forEach(element => {
@@ -80,6 +84,7 @@ app.controller('ProdutosController', function($rootScope, $location, $http, $sco
         $rootScope.valorPedido = (($rootScope.valorLanches+$rootScope.valorProdutos)-$rootScope.valorDesconto);
     }
 
+    //Função que calcula se há algum item ou lanche da promoção
     $scope.calculaValorPromocoes = function($rootScope){
         $rootScope.activetab = $location.path();
         $scope.descontoPromocao = 0;
@@ -123,6 +128,7 @@ app.controller('LanchesController', function($http, $scope, $rootScope, $locatio
     var vm = this;
     $scope.descontoPromocao = 0;
     $scope.nomePromocoes = 0;
+    //conexão com a API para pegar os dados dos produtos
     if ($rootScope.lanches == 0 || $rootScope.lanches == undefined){
         $http({
             method : "GET",
@@ -131,12 +137,13 @@ app.controller('LanchesController', function($http, $scope, $rootScope, $locatio
             $rootScope.lanches = response.data;
         });
     }
-
+    //Função que calcula o valor total do lanche de acordo com a quantidade
     $scope.calculaValorTotallanche =function(i, quantiade, valor){
         $rootScope.lanches.java[i].total = (quantiade*valor);
         $scope.calculaValorTotal();
     };
 
+    //Função que calcula o valor do peido de acordo com a quantidade de lanches e produtos escolhidos
     $scope.calculaValorTotal = function(){
         $rootScope.valorLanches = 0;
         $rootScope.lanches.java.forEach(element => {

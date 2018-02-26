@@ -1,0 +1,9 @@
+- server-side
+Desenvolvida no spring bot, procurei deixar os nomes bem específicos de acordo
+com a sua função, para facilitar futuras manutenções.
+A identação é outro ponto fundamental para melhor entendimento do código fonte.
+
+- client-side
+Procurei manter o mesmo padrão, especificando bem os nomes de 
+variáveis, e mantendo a identação do código. Com um toque de HTML e CSS 
+utilizando o bootstrap para assim, dar uma experiencia visual boa para o usuario.

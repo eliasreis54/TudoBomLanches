@@ -19,6 +19,8 @@ import com.eliasreis.TudoBomLanches.ingredientes.Queijo;
 @RestController
 @RequestMapping("tudoBomLanches/api/ListaLanches")
 public class LanchesController {
+	
+	// Retorna uma unidade dos lanches para consumo
 	@GetMapping
 	public ResponseEntity<ResponseProdutos> ListaProdutos() {
 		ResponseProdutos<ProdutosDTO> response = new ResponseProdutos<ProdutosDTO>();
