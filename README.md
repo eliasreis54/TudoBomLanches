@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/eliasreis54/TudoBomLanches.github.io.svg?branch=master)](https://travis-ci.org/eliasreis54/TudoBomLanches.github.io)
+[![Build Status](https://travis-ci.org/eliasreis54/TudoBomLanches.svg?branch=master)](https://travis-ci.org/eliasreis54/TudoBomLanches)
 ## Projeto desafio
 Breve descrição do projeto: Uma startup do ramo de alimentos, precisa de uma solução web para gerir o negócio. 
 
