@@ -21,6 +21,7 @@ import com.eliasreis.TudoBomLanches.ingredientes.Queijo;
 public class LanchesController {
 	
 	// Retorna uma unidade dos lanches para consumo
+	@CrossOrigin(origins = "*")
 	@GetMapping
 	public ResponseEntity<ResponseProdutos> ListaProdutos() {
 		ResponseProdutos<ProdutosDTO> response = new ResponseProdutos<ProdutosDTO>();
