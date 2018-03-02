@@ -7,8 +7,8 @@ app.run(function($rootScope) {
     $rootScope.valorDesconto = 0;
     $rootScope.percDescontoLigth = 10;
     $rootScope.erro = "";
-}); 
-app.config(function($routeProvider, $locationProvider)
+});
+app.config(function($routeProvider, $locationProvider, )
 {
    // remove o # da url
    $locationProvider.html5Mode(true);
@@ -41,11 +41,7 @@ app.config(function($routeProvider, $locationProvider)
 
 app.controller('ProdutosController', function($rootScope, $location, $http, $scope) {
     $rootScope.activetab = $location.path();
-    var vm = this;
     
-    $scope.descontoPromocao = 0;
-    $scope.nomePromocoes = 0;
-    //conexão com a API para pegar os dados dos produtos
     if ($rootScope.produtos==0 || $rootScope.produtos == undefined){
         $http({
             method : "GET",
@@ -55,14 +51,11 @@ app.controller('ProdutosController', function($rootScope, $location, $http, $sco
         });
     }
 
-    //Função que calcula o valor do produto de acordo com a quantidade
     $scope.calculaValorTotalProduto =function(i, quantiade, valor){
         $rootScope.produtos.java[i].total = (quantiade*valor);
         $scope.calculaValorPromocoes($rootScope);
-        
     };
 
-    //Função que calcula o valor do peido de acordo com a quantidade de lanches e produtos escolhidos
     $scope.calculaValorTotal = function(){
         $rootScope.valorProdutos = 0;
         $rootScope.produtos.java.forEach(element => {
@@ -84,11 +77,8 @@ app.controller('ProdutosController', function($rootScope, $location, $http, $sco
         $rootScope.valorPedido = (($rootScope.valorLanches+$rootScope.valorProdutos)-$rootScope.valorDesconto);
     }
 
-    //Função que calcula se há algum item ou lanche da promoção
     $scope.calculaValorPromocoes = function($rootScope){
         $rootScope.activetab = $location.path();
-        $scope.descontoPromocao = 0;
-        $scope.nomePromocoes = "";
         $rootScope.produtos.java.forEach(element => {
             if (element.nome == "Hamburguer" || element.nome == "Queijo"){
                 if (element.quantidade >=3){
@@ -125,10 +115,6 @@ app.controller('ProdutosController', function($rootScope, $location, $http, $sco
 
 app.controller('LanchesController', function($http, $scope, $rootScope, $location) {
     $rootScope.activetab = $location.path();
-    var vm = this;
-    $scope.descontoPromocao = 0;
-    $scope.nomePromocoes = 0;
-    //conexão com a API para pegar os dados dos produtos
     if ($rootScope.lanches == 0 || $rootScope.lanches == undefined){
         $http({
             method : "GET",
@@ -137,13 +123,12 @@ app.controller('LanchesController', function($http, $scope, $rootScope, $locatio
             $rootScope.lanches = response.data;
         });
     }
-    //Função que calcula o valor total do lanche de acordo com a quantidade
+
     $scope.calculaValorTotallanche =function(i, quantiade, valor){
         $rootScope.lanches.java[i].total = (quantiade*valor);
         $scope.calculaValorTotal();
     };
 
-    //Função que calcula o valor do peido de acordo com a quantidade de lanches e produtos escolhidos
     $scope.calculaValorTotal = function(){
         $rootScope.valorLanches = 0;
         $rootScope.lanches.java.forEach(element => {
